@@ -1,8 +1,8 @@
 function c0=difrec();
 clc;
 %%%%%%%%%%%%%%%%%%%%%spatial & time resolution %%%%%%%%%%%%%%%%%%%%%%
-nsim=2;
-open=0;
+nsim=1;
+open=1;
 dimension = 12*1*57; %
 tfn=1*10^6;
 SR = dimension/12; %spatial resolution
@@ -344,7 +344,7 @@ for i= (2)*SR +1:(3)*SR
 end
 
 for i= (3)*SR +1:(4)*SR
-    reactionmatrix(i,1)  =0;%k23*c(i+2*SR-3*SR) - k32*c(i+3*SR-3*SR); % d[CO2]/dt
+    reactionmatrix(i,1)  =k23*c(i+2*SR-3*SR) - k32*c(i+3*SR-3*SR); % d[CO2]/dt
 end
 for i= (4)*SR +1:(5)*SR
     reactionmatrix(i,1)  =  k45*c(i-4*SR)*c(i+5*SR-4*SR) - k54*c(i+4*SR-4*SR) ;   % d[HA]/dt
@@ -482,4 +482,4 @@ end
 dcdt = reactionmatrix(:,:) + diffusionmatrix(:,:)- PMCA(:,:);
 %%dcdt = PMCA(:,:);
 end
-end   
+end
